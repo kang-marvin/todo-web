@@ -1,5 +1,7 @@
 export const initialState = {
-  /** Categories */
-  categories: [1,2],
-  // errorMessage: ""
+  //categories
+  categoriesInitialState: {
+    data: [],
+    errors: null
+  }
 };

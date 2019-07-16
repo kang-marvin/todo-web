@@ -39,6 +39,6 @@ const routes = state => {
       </Switch>
     </App>
   );
-}
+};
 
 export default routes;

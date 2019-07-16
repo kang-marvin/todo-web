@@ -10,7 +10,7 @@ import { saveState } from "./utils/localStorageUtils";
 /** Import CDN css files here */
 
 import routes from "./routes";
-import "./styles/index.css";
+// import "./css/index.css";
 
 require("dotenv").config();
 

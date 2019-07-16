@@ -1,9 +1,5 @@
-import * as httpMethods from "./common/httpMethods.js";
+import * as httpMethods from "../utils/helpers/httpMethods";
 
-class categoryApi {
-  static getAllCategories() {
-    return httpMethods.get('/categories');
-  }
-}
-
-export default categoryApi;
+export const getStatusApi = (endpoint) => {
+  return httpMethods.get(endpoint);
+};

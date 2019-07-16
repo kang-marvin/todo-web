@@ -1,26 +1,35 @@
-import * as types from "../actions/actionTypes";
+// state
 import { initialState } from "../../data/initialState";
 
-const initialCategoriesState = initialState.categories;
+// types
+import { GET_CATEGORIES_FAILURE, GET_CATEGORIES_SUCCESS } from "../actions/category/categoryTypes";
 
-const categoriesReducer = (state = initialCategoriesState, action) => {
+/**
+ * reducer
+ *
+ * This reducer changes the categories state of the application
+ *
+ * @param {Object} [state=categoriesInitialState]
+ * @param action = categoriesActions
+ *
+ * @returns {Object} state
+ */
+const reducer = (state = initialState.categoriesInitialState, action) => {
   switch (action.type) {
-    case types.GET_ALL_CATEGORIES_SUCCESS:
-      return Object.assign({}, state, {
-        categories: action.categories.data.categories,
-        errorMessage: ""
-      });
-
-    case types.GET_ALL_CATEGORIES_FAILURE:
-      return Object.assign({}, state, {
-        categories: [1],
-        errorMessage: action.errors.message
-      });
-
+    case GET_CATEGORIES_SUCCESS:
+      return {
+        ...state,
+        data: action.categories,
+      };
+    case GET_CATEGORIES_FAILURE:
+      return {
+        ...state,
+        errors: action.errors,
+      };
     default:
       return state;
   }
-}
+};
 
-export default categoriesReducer;
+export default reducer;
 

@@ -1,44 +1,49 @@
-import * as types from "../actionTypes";
+// types
+import { GET_CATEGORIES_FAILURE, GET_CATEGORIES_SUCCESS } from "./categoryTypes";
 
-import { categoryApi } from "../../../api";
+// api calls
+import { getStatusApi } from "../../../api/category";
 
-/** Redux Action Creators */
+/**
+ * Get categories success action creator
+ *
+ * @param {categories[]} categories
+ *
+ * @returns {{categories: categories[], type: string}}
+ */
+export const getCategoriesSuccess = (categories) => ({
+  categories,
+  type: GET_CATEGORIES_SUCCESS
+});
 
-export const getCategoriesSuccess = (categories) => {
-  return {
-    type: types.GET_ALL_CATEGORIES_SUCCESS,
-    categories
-  }
-}
+/**
+ * Get categories failure action creator
 
-export const getCategoriesFailure = (errors) => {
-  return {
-    type: types.GET_ALL_CATEGORIES_FAILURE,
-    errors
-  }
-}
+ * @returns {{errors: *, type: string}}
+ */
+export const getCategoriesFailure = (errors) => ({
+  errors,
+  type: GET_CATEGORIES_FAILURE
+});
 
-/** API calls */
-
-export function getCategories() {
-  return function(dispatch) {
-    return categoryApi
-      .getAllCategories()
-      .then(response => {
-        debugger
-        if (response.status === 200) {
-          dispatch(getCategoriesSuccess(response.data));
-        } else {
-          dispatch(getCategoriesFailure(response.data));
-        }
-      })
-      .catch(error => {
-        throw error;
-      });
-  };
-}
-
-
-
-
-
+/**
+ * Thunk
+ *
+ * Makes an api call to get the categories
+ *
+ * @returns {Function} action type and payload
+ */
+export const getAssetCategories = () => dispatch => {
+  debugger;
+  return getStatusApi('http://locahost:8009/api/v1/categories')
+    .then(response => {
+      if (response.status === 200) {
+        dispatch(getCategoriesSuccess(response.data));
+      } else {
+        dispatch(getCategoriesFailure(response.data));
+      }
+    })
+    .catch(error => {
+      throw error;
+    });
+};

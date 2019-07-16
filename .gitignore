@@ -1,9 +1,6 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # VS generated files
 .vscode/*
-/.pnp
-.pnp.js
+.idea/
 
 # Node Modules
 /node_modules
@@ -30,4 +27,3 @@ package-lock.json
 
 # Misc
 .DS_Store
-
