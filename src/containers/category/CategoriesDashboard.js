@@ -10,15 +10,18 @@ class CategoriesDashboard extends React.Component {
   * Fetch categories once component is mounted.
   */
   componentDidMount() {
+    console.log(" this.props.getAssetCategories();", this.props.getAssetCategories());
     this.props.getAssetCategories();
   }
 
-  render(){
+  render() {
+    const { categories } = this.props;
+
     return (
       <div>
-        {this.props.categories ? this.props.categories.length : '-'}
+        {categories ? categories.length : "No Categories Found"}
       </div>
-    )
+    );
   }
 }
 

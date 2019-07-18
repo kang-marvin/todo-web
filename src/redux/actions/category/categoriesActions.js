@@ -1,11 +1,11 @@
 import { GET_CATEGORIES_FAILURE, GET_CATEGORIES_SUCCESS } from "./categoryTypes";
-
 import { getStatusApi } from "../../../api/category";
+
 
 /**
  * Get categories success action creator
  *
- * @param {categories[]} categories
+ * @param {{status, data}} categories
  *
  * @returns {{categories: categories[], type: string}}
  */
@@ -32,15 +32,12 @@ export const getCategoriesFailure = (errors) => ({
  * @returns {Function} action type and payload
  */
 export const getAssetCategories = () => dispatch => {
-  return getStatusApi('http://locahost:8009/api/v1/categories')
-    .then(response => {
-      if (response.status === 200) {
-        dispatch(getCategoriesSuccess(response.data));
-      } else {
-        dispatch(getCategoriesFailure(response.data));
-      }
-    })
-    .catch(error => {
-      throw error;
-    });
+
+  const {status, data, message }= getStatusApi();
+
+  if (status === 200) {
+    return  dispatch(getCategoriesSuccess(data.categories));
+  } else {
+    return  dispatch(getCategoriesFailure(message));
+  }
 };
