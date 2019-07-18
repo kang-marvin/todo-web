@@ -1,7 +1,5 @@
-// state
 import { initialState } from "../../data/initialState";
 
-// types
 import { GET_CATEGORIES_FAILURE, GET_CATEGORIES_SUCCESS } from "../actions/category/categoryTypes";
 
 /**

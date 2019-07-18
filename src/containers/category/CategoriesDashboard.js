@@ -1,21 +1,10 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-// import * as categoriesActions from "../../redux/actions/category/categoriesActions";
-// import { bindActionCreators } from "redux";
 import { getAssetCategories } from "../../redux/actions/category/categoriesActions";
 
 class CategoriesDashboard extends React.Component {
-
-  initialState = {
-    categories: {
-      id: "1",
-      title: "hELLO"
-    }
-  };
-
-  state = this.initialState;
 
   /*
   * Fetch categories once component is mounted.
@@ -25,8 +14,6 @@ class CategoriesDashboard extends React.Component {
   }
 
   render(){
-    console.log("props", this.props);
-    console.log("SATTE", this.state);
     return (
       <div>
         {this.props.categories ? this.props.categories.length : '-'}
@@ -36,18 +23,18 @@ class CategoriesDashboard extends React.Component {
 }
 
 CategoriesDashboard.propTypes = {
-  // categories: PropTypes.array.isRequired,
-  // actions: PropTypes.object.isRequired,
-  // errorMessage: PropTypes.string
+  categories: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-  categories: state.categories
+  categories: state.categories.data
 });
 
 const mapDispatchToProps = dispatch => ({
   getAssetCategories: () => dispatch(getAssetCategories())
-  // actions: bindActionCreators(categoriesActions, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesDashboard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CategoriesDashboard);
